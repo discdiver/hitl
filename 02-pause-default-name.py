@@ -10,7 +10,9 @@ class UserNameInput(RunInput):
 @flow(log_prints=True)
 async def greet_user():
     user_input = await pause_flow_run(
-        wait_for_input=UserNameInput.with_initial_data(name="anonymous")
+        wait_for_input=UserNameInput.with_initial_data(
+            description="Your first name, given at birth, please.", name="anonymous"
+        )
     )
 
     if user_input.name == "anonymous":

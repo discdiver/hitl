@@ -1,5 +1,5 @@
 """Using AI vision to extract a damaged part report from an image in a
-hypothetical car insurance claim using Marvin. We use prefect to define
+hypothetical car insurance claim using Marvin. We use Prefect to define
 an interactive flow to audit the draft before submitting it to a system of record.
 
 authored by: @kevingrismore and @zzstoatzz
@@ -32,11 +32,11 @@ class Car(BaseModel):
 
 class DamagedPart(BaseModel):
     part: str = Field(
-        description="short unique name for a damaged part",
-        example="front_left_bumper",
+        description="Short, unique name for a damaged part",
+        example="front_bumper",
     )
-    severity: Severity = Field(description="objective severity of part damage")
-    description: str = Field(description="specific high level summary in 1 sentence")
+    severity: Severity = Field(description="Severity of part damage")
+    description: str = Field(description="Specific high level summary in 1 sentence")
 
 
 def build_damage_report_model(damages: list[DamagedPart]) -> type[M]:
@@ -58,7 +58,6 @@ def marvin_extract_damages_from_url(image_url: str) -> list[DamagedPart]:
         instructions=(
             "Give extremely brief, high-level descriptions of the damage."
             " Only include the 2 most significant damages, which may also be minor and/or moderate."
-            # only want 2 damages for purposes of this example
         ),
     )
 
