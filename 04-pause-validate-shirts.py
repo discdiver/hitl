@@ -7,7 +7,6 @@ from prefect.input import RunInput
 class ShirtOrder(RunInput):
     size: Literal["small", "medium", "large", "xlarge"]
     color: Literal["red", "green", "black"]
-    quantity: int
 
     @pydantic.validator("color")
     def validate_order(cls, value, values, **kwargs):
